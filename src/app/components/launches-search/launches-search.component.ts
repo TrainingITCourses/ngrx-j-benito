@@ -5,6 +5,8 @@ import { LaunchesService } from 'app/services';
 import { LoadLaunches } from 'app/store/global-store.actions';
 import { GlobalStore, GlobalSlideTypes } from 'app/store/global-store.state';
 import { CriterionTypes } from 'app/models';
+import { Store } from '@ngrx/store';
+import { State } from 'app/reducers/global.reducer';
 
 @Component({
   selector: 'app-launches-search',
@@ -16,23 +18,23 @@ export class LaunchesSearchComponent implements OnInit {
   public filteredLaunches: any[] = [];
 
   constructor(private launchesService: LaunchesService,
-              private global: GlobalStore) { }
+              private global: GlobalStore, private store: Store<State>) { }
 
   ngOnInit() {
     this.launchesService
       .getLaunches()
       .subscribe((launches) => {
-        this.global.dispatch(new LoadLaunches(launches));
+        this.store.dispatch(new LoadLaunches(launches));
     });
 
-    this.global
-      .select$(GlobalSlideTypes.Launches)
+    this.store
+      .select(GlobalSlideTypes.Launches)
       .subscribe(launches => {
         this.launches = launches;
       });
 
-    this.global
-      .select$(GlobalSlideTypes.Criterion)
+    this.store
+      .select(GlobalSlideTypes.Criterion)
       .subscribe(criterion => {
         this.launchCriterionChange(criterion);
       });
