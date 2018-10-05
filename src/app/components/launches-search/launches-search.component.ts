@@ -5,6 +5,8 @@ import { LaunchesService } from 'app/services';
 import { LoadLaunches } from 'app/store/global-store.actions';
 import { GlobalStore, GlobalSlideTypes } from 'app/store/global-store.state';
 import { CriterionTypes } from 'app/models';
+import { Store } from '@ngrx/store';
+import { State } from 'app/reducers/global.reducer';
 
 @Component({
   selector: 'app-launches-search',
@@ -16,7 +18,7 @@ export class LaunchesSearchComponent implements OnInit {
   public filteredLaunches: any[] = [];
 
   constructor(private launchesService: LaunchesService,
-              private global: GlobalStore) { }
+              private global: GlobalStore, private store: Store<State>) { }
 
   ngOnInit() {
     this.launchesService
@@ -31,10 +33,11 @@ export class LaunchesSearchComponent implements OnInit {
         this.launches = launches;
       });
 
-    this.global
-      .select$(GlobalSlideTypes.Criterion)
-      .subscribe(criterion => {
-        this.launchCriterionChange(criterion);
+    this.store
+      .select('global')
+      .subscribe(global => {
+        console.log('log', global.criterion);
+        this.launchCriterionChange(global.criterion);
       });
   }
 

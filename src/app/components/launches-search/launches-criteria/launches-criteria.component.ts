@@ -5,6 +5,8 @@ import { BehaviorSubject, forkJoin } from 'rxjs';
 
 import { GlobalStore, GlobalSlideTypes } from 'app/store/global-store.state';
 import { LoadAgencies, LoadMissionTypes, LoadStatusTypes, LoadCriterion } from 'app/store/global-store.actions';
+import { Store } from '@ngrx/store';
+import { State } from 'app/reducers/global.reducer';
 
 @Component({
   selector: 'app-launches-criteria',
@@ -17,7 +19,7 @@ export class LaunchesCriteriaComponent implements OnInit {
   public criterionResults$: BehaviorSubject<any> = new BehaviorSubject([]);
 
   constructor(private launchesService: LaunchesService,
-              private global: GlobalStore) { }
+              private global: GlobalStore, private store: Store<State>) { }
 
   ngOnInit() {
     forkJoin(
@@ -52,11 +54,11 @@ export class LaunchesCriteriaComponent implements OnInit {
         this.criterionResults$.next(statusTypes);
         break;
     }
-    this.global.dispatch(new LoadCriterion(null));
+    this.store.dispatch(new LoadCriterion(null));
   }
 
   onCriterionResultChange(criterionResultId: string) {
-    this.global.dispatch(
+    this.store.dispatch(
       new LoadCriterion({
         type: this.criterionType,
         id: Number(criterionResultId)
