@@ -1,7 +1,7 @@
 export enum CriterionTypes {
   Agencies = 'agencies',
-  MissionTypes = 'types',
-  StatusTypes = 'status'
+  MissionTypes = 'missionTypes',
+  StatusTypes = 'statusTypes'
 }
 
 export class Criterion {

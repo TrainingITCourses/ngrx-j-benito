@@ -2,8 +2,8 @@ import { Action } from '@ngrx/store';
 import { Criterion } from 'app/models';
 
 export enum SearchActionTypes {
-  LoadCriterion = '[Global] LoadCriterion',
-  LoadLaunches = '[Global] LoadLaunches'
+  LoadCriterion = '[Search] Load Criterion'
+  // LoadLaunches = '[Global] LoadLaunches'
 }
 
 export class LoadCriterion implements Action {
@@ -11,9 +11,9 @@ export class LoadCriterion implements Action {
   constructor(public readonly payload: Criterion) {}
 }
 
-export class LoadLaunches implements Action {
-  readonly type = SearchActionTypes.LoadLaunches;
-  constructor(public readonly payload: any[]) {}
-}
+// export class LoadLaunches implements Action {
+//   readonly type = SearchActionTypes.LoadLaunches;
+//   constructor(public readonly payload: any[]) {}
+// }
 
-export type SearchActions = LoadCriterion | LoadLaunches;
+export type SearchActions = LoadCriterion;

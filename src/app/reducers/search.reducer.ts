@@ -4,12 +4,12 @@ import { SearchActionTypes, SearchActions } from 'app/reducers/search.actions';
 
 export interface SearchState {
   criterion: Criterion;
-  launches: any[];
+  // launches: any[];
 }
 
 export const initialState: SearchState = {
-  criterion: null,
-  launches: []
+  criterion: null
+  // launches: []
 };
 
 export function reducer(state = initialState, action: SearchActions): SearchState {
@@ -18,9 +18,9 @@ export function reducer(state = initialState, action: SearchActions): SearchStat
     case SearchActionTypes.LoadCriterion:
       result.criterion = action.payload;
       break;
-    case SearchActionTypes.LoadLaunches:
-      result.launches = action.payload;
-      break;
+    // case SearchActionTypes.LoadLaunches:
+    //   result.launches = action.payload;
+    //   break;
     default:
       return state;
   }

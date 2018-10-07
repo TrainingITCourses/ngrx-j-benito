@@ -2,11 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { Criterion } from 'app/models';
 import { LaunchesService } from 'app/services';
 
-import { LoadLaunches } from 'app/store/global-store.actions';
-import { GlobalStore, GlobalSlideTypes } from 'app/store/global-store.state';
 import { CriterionTypes } from 'app/models';
 import { Store } from '@ngrx/store';
-import { State } from 'app/reducers/global.reducer';
+import { State } from 'app/reducers';
+import { LoadLaunches } from 'app/reducers/launches.actions';
 
 @Component({
   selector: 'app-launches-search',
@@ -18,7 +17,7 @@ export class LaunchesSearchComponent implements OnInit {
   public filteredLaunches: any[] = [];
 
   constructor(private launchesService: LaunchesService,
-              private global: GlobalStore, private store: Store<State>) { }
+              private store: Store<State>) { }
 
   ngOnInit() {
     this.launchesService
@@ -28,22 +27,23 @@ export class LaunchesSearchComponent implements OnInit {
     });
 
     this.store
-      .select(GlobalSlideTypes.Launches)
-      .subscribe(launches => {
-        this.launches = launches;
+      .select('launches')
+      .subscribe(state => {
+        console.log('entra', state.launches);
+        this.launches = state.launches;
       });
 
     this.store
-      .select('global')
-      .subscribe(global => {
-        console.log('log', global.criterion);
-        this.launchCriterionChange(global.criterion);
+      .select('search')
+      .subscribe(search => {
+        console.log('assiii', search.criterion)
+        this.launchCriterionChange(search.criterion);
       });
   }
 
   private launchCriterionChange(criterion: Criterion) {
 
-    /* If not criterion, clean list */
+    /* If not criterion, clean launches list */
     if (!criterion) {
       this.filteredLaunches = [];
       return;

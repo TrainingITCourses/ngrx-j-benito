@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { LaunchesService } from 'app/services';
-import { CriterionType, Criterion, CriterionTypes } from 'app/models';
+import { CriterionType, Criterion } from 'app/models';
 import { BehaviorSubject, forkJoin } from 'rxjs';
 
-import { GlobalStore, GlobalSlideTypes } from 'app/store/global-store.state';
-import { LoadAgencies, LoadMissionTypes, LoadStatusTypes, LoadCriterion } from 'app/store/global-store.actions';
 import { Store } from '@ngrx/store';
-import { State } from 'app/reducers/global.reducer';
+import { State } from 'app/reducers';
+import { LoadAgencies, LoadMissionTypes, LoadStatusTypes } from 'app/reducers/data.actions';
+import { LoadCriterion } from 'app/reducers/search.actions';
 
 @Component({
   selector: 'app-launches-criteria',
@@ -14,12 +14,12 @@ import { State } from 'app/reducers/global.reducer';
   styleUrls: ['./launches-criteria.component.scss']
 })
 export class LaunchesCriteriaComponent implements OnInit {
-  public criterionType: CriterionType;
   public isLoaded: boolean;
+  public criterionType: CriterionType;
   public criterionResults$: BehaviorSubject<any> = new BehaviorSubject([]);
 
   constructor(private launchesService: LaunchesService,
-              private global: GlobalStore, private store: Store<State>) { }
+              private store: Store<State>) { }
 
   ngOnInit() {
     forkJoin(
@@ -28,33 +28,19 @@ export class LaunchesCriteriaComponent implements OnInit {
       this.launchesService.getStatusTypes()
     )
     .subscribe(([agencies, missionTypes, statusTypes]) => {
-      this.global.dispatch(new LoadAgencies(agencies));
-      this.global.dispatch(new LoadMissionTypes(missionTypes));
-      this.global.dispatch(new LoadStatusTypes(statusTypes));
+      this.store.dispatch(new LoadAgencies(agencies));
+      this.store.dispatch(new LoadMissionTypes(missionTypes));
+      this.store.dispatch(new LoadStatusTypes(statusTypes));
       this.isLoaded = true;
     });
   }
 
   onCriterionTypeChange(criterionType: CriterionType) {
-    this.criterionType = criterionType;
-
-    switch (criterionType) {
-      case CriterionTypes.Agencies:
-        const agencies = this.global.selectSnapShot(GlobalSlideTypes.Agencies);
-        this.criterionResults$.next(agencies);
-        break;
-
-      case CriterionTypes.MissionTypes:
-        const missionTypes = this.global.selectSnapShot(GlobalSlideTypes.MissionTypes);
-        this.criterionResults$.next(missionTypes);
-        break;
-
-      case CriterionTypes.StatusTypes:
-        const statusTypes = this.global.selectSnapShot(GlobalSlideTypes.StatusTypes);
-        this.criterionResults$.next(statusTypes);
-        break;
-    }
-    this.store.dispatch(new LoadCriterion(null));
+    this.store.select('data').subscribe(data => {
+      this.criterionResults$.next(data[criterionType]);
+      this.store.dispatch(new LoadCriterion(null));
+      this.criterionType = criterionType;
+    });
   }
 
   onCriterionResultChange(criterionResultId: string) {
