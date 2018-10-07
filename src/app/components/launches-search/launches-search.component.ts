@@ -34,9 +34,10 @@ export class LaunchesSearchComponent implements OnInit {
       });
 
     this.store
-      .select(GlobalSlideTypes.Criterion)
-      .subscribe(criterion => {
-        this.launchCriterionChange(criterion);
+      .select('global')
+      .subscribe(global => {
+        console.log('log', global.criterion);
+        this.launchCriterionChange(global.criterion);
       });
   }
 

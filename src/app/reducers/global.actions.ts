@@ -2,11 +2,11 @@ import { Action } from '@ngrx/store';
 import { Criterion } from 'app/models';
 
 export enum GlobalActionTypes {
-  LoadAgencies = '[Global] Load Agencies',
-  LoadMissionTypes = '[Global] Load Mission Types',
-  LoadStatusTypes = '[Global] Load Status Types',
-  LoadLaunches = '[Global] Load Launches',
-  LoadCriterion = '[Global] Load Criterion'
+  LoadAgencies = '[Global] LoadAgencies',
+  LoadMissionTypes = '[Global] LoadMissionTypes',
+  LoadStatusTypes = '[Global] LoadStatusTypes',
+  LoadLaunches = '[Global] LoadLaunches',
+  LoadCriterion = '[Global] LoadCriterion'
 }
 
 export class LoadAgencies implements Action {
