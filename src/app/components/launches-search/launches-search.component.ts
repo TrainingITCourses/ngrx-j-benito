@@ -20,11 +20,7 @@ export class LaunchesSearchComponent implements OnInit {
               private store: Store<State>) { }
 
   ngOnInit() {
-    this.launchesService
-      .getLaunches()
-      .subscribe((launches) => {
-        this.store.dispatch(new LoadLaunches(launches));
-    });
+    this.store.dispatch(new LoadLaunches());
 
     this.store
       .select('launches')

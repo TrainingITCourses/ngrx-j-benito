@@ -23,9 +23,9 @@ export class LaunchesCriteriaComponent implements OnInit {
 
   ngOnInit() {
     forkJoin(
-      this.launchesService.getAgencies(),
-      this.launchesService.getMissionTypes(),
-      this.launchesService.getStatusTypes()
+      this.launchesService.getAgencies$(),
+      this.launchesService.getMissionTypes$(),
+      this.launchesService.getStatusTypes$()
     )
     .subscribe(([agencies, missionTypes, statusTypes]) => {
       this.store.dispatch(new LoadAgencies(agencies));

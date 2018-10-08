@@ -11,22 +11,22 @@ export class LaunchesService {
 
   constructor(private http: HttpClient) { }
 
-  public getAgencies = (): Observable<any[]> =>
+  public getAgencies$ = (): Observable<any[]> =>
   this.http
     .get(environment.url + '/assets/launchagencies.json')
     .pipe(map((res: any) => res.agencies))
 
-   public getMissionTypes = (): Observable<any[]> =>
+   public getMissionTypes$ = (): Observable<any[]> =>
     this.http
       .get(environment.url + '/assets/launchmissions.json')
       .pipe(map((res: any) => res.types))
 
-  public getStatusTypes = (): Observable<any[]> =>
+  public getStatusTypes$ = (): Observable<any[]> =>
     this.http
       .get(environment.url + '/assets/launchstatus.json')
       .pipe(map((res: any) => res.types))
 
-  public getLaunches = (): Observable<any[]> =>
+  public getLaunches$ = (): Observable<any[]> =>
     this.http
       .get(environment.url + '/assets/launchlibrary.json')
       .pipe(map((res: any) => res.launches))
