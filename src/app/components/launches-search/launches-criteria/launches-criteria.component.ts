@@ -5,8 +5,8 @@ import { BehaviorSubject, forkJoin } from 'rxjs';
 
 import { Store } from '@ngrx/store';
 import { State } from 'app/reducers';
-import { LoadAgencies, LoadMissionTypes, LoadStatusTypes } from 'app/reducers/data.actions';
-import { LoadCriterion } from 'app/reducers/search.actions';
+import { LoadAgencies, LoadMissionTypes, LoadStatusTypes } from 'app/reducers/data';
+import { LoadCriterion } from 'app/reducers/search';
 
 @Component({
   selector: 'app-launches-criteria',

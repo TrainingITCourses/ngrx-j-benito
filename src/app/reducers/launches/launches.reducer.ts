@@ -1,4 +1,4 @@
-import { LaunchesActionTypes, LaunchesActions } from 'app/reducers/launches.actions';
+import { LaunchesActionTypes, LaunchesActions } from './launches.actions';
 
 export interface LaunchesState {
   launches: any[];

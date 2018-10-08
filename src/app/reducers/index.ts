@@ -5,10 +5,10 @@ import {
   createSelector,
   MetaReducer
 } from '@ngrx/store';
-import { environment } from '../../environments/environment';
-import * as fromSearch from './search.reducer';
-import * as fromLaunches from './launches.reducer';
-import * as fromData from './data.reducer';
+import { environment } from 'environments/environment';
+import * as fromSearch from './search';
+import * as fromLaunches from './launches';
+import * as fromData from './data';
 
 export interface State {
   search: fromSearch.SearchState;

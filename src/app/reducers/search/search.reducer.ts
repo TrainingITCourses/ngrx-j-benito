@@ -1,5 +1,5 @@
 import { Criterion } from 'app/models';
-import { SearchActionTypes, SearchActions } from 'app/reducers/search.actions';
+import { SearchActionTypes, SearchActions } from './search.actions';
 
 
 export interface SearchState {

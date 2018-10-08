@@ -1,4 +1,4 @@
-import { DataActions, DataActionTypes } from 'app/reducers/data.actions';
+import { DataActions, DataActionTypes } from './data.actions';
 
 export interface DataState {
   agencies: any[];

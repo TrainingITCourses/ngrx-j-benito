@@ -9,3 +9,6 @@ cd src/app/reducers/
 ng g st State --root -m app.module.ts --spec false
 ng g r Global --spec false -r index.ts
 ng g a Global --spec false reducers
+
+npm install @ngrx/effects --save
+ng g ef Global --root ‐m ../app.module.ts --spec false

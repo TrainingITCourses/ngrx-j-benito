@@ -5,7 +5,7 @@ import { LaunchesService } from 'app/services';
 import { CriterionTypes } from 'app/models';
 import { Store } from '@ngrx/store';
 import { State } from 'app/reducers';
-import { LoadLaunches } from 'app/reducers/launches.actions';
+import { LoadLaunches } from 'app/reducers/launches';
 
 @Component({
   selector: 'app-launches-search',
@@ -29,14 +29,12 @@ export class LaunchesSearchComponent implements OnInit {
     this.store
       .select('launches')
       .subscribe(state => {
-        console.log('entra', state.launches);
         this.launches = state.launches;
       });
 
     this.store
       .select('search')
       .subscribe(search => {
-        console.log('assiii', search.criterion)
         this.launchCriterionChange(search.criterion);
       });
   }
