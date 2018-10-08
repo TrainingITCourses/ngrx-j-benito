@@ -4,7 +4,6 @@ import { mergeMap, map } from 'rxjs/operators';
 import { LaunchesLoaded, LaunchesActionTypes } from './launches.actions';
 import { LaunchesService } from 'app/services';
 
-
 @Injectable()
 export class LaunchesEffects {
   @Effect()

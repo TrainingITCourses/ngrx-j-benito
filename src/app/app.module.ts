@@ -12,6 +12,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import { EffectsModule } from '@ngrx/effects';
 import { LaunchesEffects } from 'app/reducers/launches';
+import { DataEffects } from 'app/reducers/data';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,7 @@ import { LaunchesEffects } from 'app/reducers/launches';
     FormsModule,
     StoreModule.forRoot(reducers, { metaReducers }),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
-    EffectsModule.forRoot([LaunchesEffects])
+    EffectsModule.forRoot([DataEffects, LaunchesEffects])
   ],
   providers: [
     // service.LaunchesService

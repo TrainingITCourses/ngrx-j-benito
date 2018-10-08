@@ -1,26 +1,23 @@
 import { Action } from '@ngrx/store';
 
 export enum DataActionTypes {
-  LoadAgencies = '[Data] Load Agencies',
-  LoadMissionTypes = '[Data] Load MissionTypes',
-  LoadStatusTypes = '[Data] Load StatusTypes'
+  LoadData = '[Data] Load Data',
+  DataLoaded = '[Data] Data Loaded'
 }
 
-export class LoadAgencies implements Action {
-  public readonly type = DataActionTypes.LoadAgencies;
-  constructor(public readonly payload: any[]) {}
+export class LoadData implements Action {
+  public readonly type = DataActionTypes.LoadData;
 }
 
-export class LoadMissionTypes implements Action {
-  public readonly type = DataActionTypes.LoadMissionTypes;
-  constructor(public readonly payload: any[]) {}
+export class DataLoaded implements Action {
+  readonly type = DataActionTypes.DataLoaded;
+  constructor(
+    readonly agenciesPayload: any[],
+    readonly missionTypesPayload: any[],
+    readonly statusTypesPayload: any[]
+  ) {}
 }
 
-export class LoadStatusTypes implements Action {
-  public readonly type = DataActionTypes.LoadStatusTypes;
-  constructor(public readonly payload: any[]) {}
-}
 export type DataActions =
-  LoadAgencies |
-  LoadMissionTypes |
-  LoadStatusTypes;
+  LoadData |
+  DataLoaded;

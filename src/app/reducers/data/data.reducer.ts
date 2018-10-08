@@ -4,29 +4,31 @@ export interface DataState {
   agencies: any[];
   missionTypes: any[];
   statusTypes: any[];
+  loading: boolean;
+  loaded: boolean;
 }
 
 export const initialState: DataState = {
   agencies: [],
   missionTypes: [],
-  statusTypes: []
+  statusTypes: [],
+  loading: false,
+  loaded: false
 };
 
 export function reducer(state = initialState, action: DataActions): DataState {
-  const result = { ...state };
   switch (action.type) {
-    case DataActionTypes.LoadAgencies:
-      result.agencies = action.payload;
-      break;
-      // return { ...state }
-    case DataActionTypes.LoadMissionTypes:
-      result.missionTypes = action.payload;
-      break;
-    case DataActionTypes.LoadStatusTypes:
-      result.statusTypes = action.payload;
-      break;
+    case DataActionTypes.LoadData:
+      return { ...state, loading: true };
+    case DataActionTypes.DataLoaded:
+      return {
+        agencies: action.agenciesPayload,
+        missionTypes: action.missionTypesPayload,
+        statusTypes: action.statusTypesPayload,
+        loading: false,
+        loaded: true
+      };
     default:
       return state;
   }
-  return result;
 }
