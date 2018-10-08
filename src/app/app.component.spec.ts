@@ -3,6 +3,8 @@ import { AppComponent } from './app.component';
 import * as component from './components';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { StoreModule } from '@ngrx/store';
+import { reducers, metaReducers } from 'app/reducers';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
@@ -18,7 +20,8 @@ describe('AppComponent', () => {
       ],
       imports: [
         HttpClientModule,
-        FormsModule
+        FormsModule,
+        StoreModule.forRoot(reducers, { metaReducers }),
       ]
     }).compileComponents();
   }));

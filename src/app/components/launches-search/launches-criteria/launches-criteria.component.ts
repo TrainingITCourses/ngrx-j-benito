@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CriterionType, Criterion } from 'app/models';
-import { BehaviorSubject, forkJoin } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 
 import { Store } from '@ngrx/store';
 import { State } from 'app/reducers';

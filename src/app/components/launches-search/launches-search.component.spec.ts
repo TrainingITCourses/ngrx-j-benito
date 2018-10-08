@@ -5,6 +5,8 @@ import * as include from 'app/components';
 import { HttpClientModule } from '@angular/common/http';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { FormsModule } from '@angular/forms';
+import { Store, StoreModule } from '@ngrx/store';
+import { reducers, metaReducers } from 'app/reducers';
 
 describe('LaunchesSearchComponent', () => {
   let component: LaunchesSearchComponent;
@@ -23,7 +25,11 @@ describe('LaunchesSearchComponent', () => {
       imports: [
         HttpClientModule,
         HttpClientTestingModule,
-        FormsModule
+        FormsModule,
+        StoreModule.forRoot(reducers, { metaReducers })
+      ],
+      providers: [
+        Store
       ]
     })
     .compileComponents();

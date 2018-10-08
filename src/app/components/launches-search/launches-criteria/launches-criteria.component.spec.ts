@@ -5,6 +5,8 @@ import { CriterionResultsComponent } from './criterion-results';
 import { CriterionTypesComponent } from './criterion-types';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { StoreModule, Store } from '@ngrx/store';
+import { reducers, metaReducers } from 'app/reducers';
 
 describe('LaunchesCriteriaComponent', () => {
   let component: LaunchesCriteriaComponent;
@@ -19,7 +21,11 @@ describe('LaunchesCriteriaComponent', () => {
       ],
       imports: [
         HttpClientModule,
-        FormsModule
+        FormsModule,
+        StoreModule.forRoot(reducers, { metaReducers }),
+      ],
+      providers: [
+        Store
       ]
     })
     .compileComponents();
